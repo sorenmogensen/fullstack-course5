@@ -30,7 +30,7 @@ function NarrowItDownController(MenuSearchService){
   var ctrl = this;
 
   ctrl.searchTerm = '';
-  ctrl.found = [];
+  ctrl.found = null;
 
   ctrl.doSearch = function(){
     if(ctrl.searchTerm){
@@ -47,6 +47,10 @@ function NarrowItDownController(MenuSearchService){
   ctrl.removeItem = function(index){
     console.log('removing: '+index);
     ctrl.found.splice(index, 1);
+  }
+
+  ctrl.nothingFound = function(){
+    return (ctrl.found instanceof Array) && ctrl.found.length == 0;
   }
 }
 
