@@ -1,27 +1,41 @@
 (function(){
+'use strict';
 
 angular.module('MenuApp')
-.config(RoutesConfig);
+.config(routerConfig);
 
-RoutesConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
-function RoutesConfig($stateProvider, $urlRouterProvider){
+routerConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+function routerConfig($stateProvider, $urlRouterProvider){
   $stateProvider
   .state('home', {
     url: '/',
-    templateUrl: 'src/menuapp/home-view.template.html'
+    templateUrl: 'src/home/home.html'
   })
   .state('categories', {
     url: '/categories',
-    templateUrl: 'src/menuapp/categories-view.template.html',
-    //resolve: {
-    //  items: ['MenuDataService', function(MenuDataService){
-    //    return MenuDataService.getAllCategories();
-    //  }]
-    //}
+    templateUrl: 'src/categories/categories.html',
+    controller: 'CategoriesController',
+    controllerAs: 'categoriesCtrl',
+    resolve: {
+      categories: ['MenuDataService', function(MenuDataService){
+        return MenuDataService.getAllCategories();
+      }]
+    }
   })
+  .state('items', {
+    url: '/items/{category}',
+    templateUrl: 'src/items/items.html',
+    controller: 'ItemsController',
+    controllerAs: 'itemsCtrl',
+    resolve: {
+      items: ['$stateParams', 'MenuDataService', function($stateParams, MenuDataService){
+        return MenuDataService.getItemsForCategory($stateParams.category);
+      }]
+    }
+  });
 
-  $urlRouterProvider
-  .otherwise('/');
+  $urlRouterProvider.otherwise('/');
 }
 
 })();
+
