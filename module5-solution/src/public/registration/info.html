@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="css/registration.css">
+<div class="registration">
+<div ng-if="ctrl.service.menu_item != null">
+<h2>Your Info</h2>
+<dl>
+<dt>First name:</dt><dd>{{ ctrl.service.firstname }}</dd>
+<dt>Last name:</dt><dd>{{ ctrl.service.lastname }}</dd>
+<dt>Email:</dt><dd>{{ ctrl.service.email }}</dd>
+<dt>Phone:</dt><dd>{{ ctrl.service.phone }}</dd>
+<dt>Favorite dish:</dt>
+<dd><img ng-src="{{ ctrl.service.getImageSrc(ctrl.service.menu_item.short_name) }}" width="200" height="200" alt="{{ ctrl.service.menu_item.short_name }}"><h3>{{ ctrl.service.menu_item.name }}</h3><p>{{ ctrl.service.menu_item.description }}</p></dd>
+</dl>
+</div>
+<div ng-if="ctrl.service.menu_item == null">Not Signed Up Yet. <a ui-sref="public.signup">sign up Now!</a></div>
+</div>

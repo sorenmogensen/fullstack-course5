@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="css/registration.css">
+<form class="registration" name="signup" novalidate>
+  <label><span>First name:</span>
+  <input type="text" name="firstname"
+         ng-model="ctrl.firstname"
+         required
+         minlength="2">
+  </label>
+  <span ng-if="(signup.firstname.$error.required ||
+                signup.firstname.$error.minlength) &&
+               signup.firstname.$touched">
+    First name must be at least 2 characters
+  </span>
+  <br>
+  <label><span>Last name:</span>
+  <input type="text" name="lastname"
+         ng-model="ctrl.lastname"
+         required
+         minlength="2">
+  </label>
+  <span ng-if="(signup.lastname.$error.required ||
+                signup.lastname.$error.minlength) &&
+               signup.lastname.$touched">
+    Last name must be at least 2 characters
+  </span>
+  <br>
+  <label><span>Email:</span>
+  <input type="email" name="email" placeholder="Email"
+         ng-model="ctrl.email"
+         required>
+  </label>
+  <span ng-if="signup.email.$invalid &&
+               signup.email.$touched">
+    Must be a valid email address: handle@domain format
+  </span>
+  <br>
+  <label><span>Phone:</span>
+  <input type="text" name="phone" placeholder="Phone ###-###-####"
+         ng-model="ctrl.phone"
+         pattern="(\d{3})-(\d{3})-(\d{4})">
+  </label>
+  <span ng-if="signup.phone.$invalid &&
+               signup.phone.$touched">
+    Phone must be in the format ###-###-####
+  </span>
+  <br>
+  <label><span>Favorite dish menu number:</span>
+  <input type="text" name="dish" placeholder="Favorite dish"
+         ng-model="ctrl.dish">
+  </label>
+  <span ng-if="ctrl.menu_item == null">No such menu number exists.</span>
+  <br>
+  <button
+         ng-disabled="signup.$invalid"
+         ng-click="ctrl.submit($event)">Submit</button>
+  <br>
+  <p ng-if="ctrl.registered">Your information has been saved.</p>
+</form>
