@@ -12,7 +12,7 @@ function RegistrationController(RegistrationService){
   reg.email = "";
   reg.phone = "";
   reg.dish = "";
-  reg.menu_item = null;
+  reg.menu_item = false;
   reg.registered = false;
 
   reg.submit = function(e){
